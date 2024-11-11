@@ -27,19 +27,15 @@ class _DemonSlayerUnityScreenState extends State<DemonSlayerUnityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Unity Demo'),
+        title: Text('Demon Slayer AR'),
       ),
-      body: Column(
+      body: Stack(
         children: [
           Expanded(
             child: UnityWidget(
               onUnityCreated: onUnityCreated,
               fullscreen: false,
             ),
-          ),
-          ElevatedButton(
-            onPressed: sendMessageToUnity,
-            child: Text('Send Message to Unity'),
           ),
         ],
       ),
