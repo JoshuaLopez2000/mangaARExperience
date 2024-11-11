@@ -14,7 +14,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_unity_widget:
-    path: ../
+    git:
+      url: https://github.com/juicycleff/flutter-unity-view-widget
+      ref: f51fedc77007f603c5df68820fcf51d04c32e1d9
   pointer_interceptor: ^0.9.3+2
 
 dev_dependencies:
