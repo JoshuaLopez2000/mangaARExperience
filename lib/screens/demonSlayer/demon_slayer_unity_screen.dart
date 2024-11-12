@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 
@@ -8,19 +10,36 @@ class DemonSlayerUnityScreen extends StatefulWidget {
 
 class _DemonSlayerUnityScreenState extends State<DemonSlayerUnityScreen> {
   late UnityWidgetController _unityWidgetController;
+  bool _isUnityLoaded = false;
 
-  // Callback para cuando el controlador de Unity esté inicializado
-  void onUnityCreated(UnityWidgetController controller) {
-    _unityWidgetController = controller;
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        _isUnityLoaded = true;
+      });
+    });
   }
 
-  // Método para enviar mensajes a Unity
-  void sendMessageToUnity() {
+  void onUnityCreated(UnityWidgetController controller) {
+    _unityWidgetController = controller;
     _unityWidgetController.postMessage(
-      'GameObjectName', // Nombre del objeto en Unity
-      'MethodName', // Nombre del método en Unity
-      'Message from Flutter', // Mensaje a Unity
+      'SceneManager',
+      'LoadDemonSlayerV11ARScene',
+      '',
     );
+  }
+
+  @override
+  void dispose() {
+    _unityWidgetController.postMessage(
+      'SceneManager',
+      'LoadEmptyScene',
+      '',
+    );
+    super.dispose();
   }
 
   @override
@@ -31,12 +50,33 @@ class _DemonSlayerUnityScreenState extends State<DemonSlayerUnityScreen> {
       ),
       body: Stack(
         children: [
-          Expanded(
+          // Unity Widget
+          Positioned.fill(
             child: UnityWidget(
               onUnityCreated: onUnityCreated,
               fullscreen: false,
             ),
           ),
+          // Fondo de carga con temporizador
+          if (!_isUnityLoaded)
+            Positioned.fill(
+              child: Container(
+                color: Colors.black, // Cambia el color según tu preferencia
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 20),
+                      Text(
+                        'Cargando...',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
