@@ -16,7 +16,7 @@ class _DemonSlayerUnityScreenState extends State<DemonSlayerUnityScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 3), () {
       setState(() {
         _isUnityLoaded = true;
       });
@@ -57,11 +57,10 @@ class _DemonSlayerUnityScreenState extends State<DemonSlayerUnityScreen> {
               fullscreen: false,
             ),
           ),
-          // Fondo de carga con temporizador
           if (!_isUnityLoaded)
             Positioned.fill(
               child: Container(
-                color: Colors.black, // Cambia el color según tu preferencia
+                color: Colors.black,
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
