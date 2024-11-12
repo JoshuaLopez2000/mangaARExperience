@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig>
   <Tracking>
+    <ImageTarget name="demonslayer-kimetsunoyaiba-c089v11-p024" size="1.000000 1.000000" />
     <ImageTarget name="samusarcard" size="1.000000 1.000000" />
     <ImageTarget name="pikminsarcard" size="1.000000 1.000000" />
     <ImageTarget name="marioarcard" size="1.000000 1.000000" />

@@ -5,13 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/SamplesResources/Scenes/0-Main.unity
-    guid: a09cb257d566c489595b16ab37547666
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/EmptyScene.unity
+    guid: 30d9c80c428f9504ab2d00953546d48a
+  - enabled: 1
+    path: Assets/Scenes/DemonSlayerV11.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/Movimiento.unity
-    guid: 91927b39f67f344a18cb58c692aaaf02
   m_configObjects: {}
