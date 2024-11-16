@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
-import 'package:flutter_unity_widget_example/screens/demonSlayer/choose_volume_demon_slayer.dart';
+import 'package:flutter_unity_widget_example/views/chooseVolumeManga/choose_volume_demon_slayer.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'MangaFont',
       ),
@@ -85,7 +86,8 @@ class _MyAppState extends State<MyApp> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => screen),
+                                      builder: (context) => screen,
+                                    ),
                                   );
                                 },
                                 child: Container(
@@ -112,7 +114,7 @@ class _MyAppState extends State<MyApp> {
             ),
             // Unity Widget oculto
             Offstage(
-              offstage: true, // Oculta el widget de Unity
+              offstage: true,
               child: UnityWidget(
                 onUnityCreated: onUnityCreated,
               ),

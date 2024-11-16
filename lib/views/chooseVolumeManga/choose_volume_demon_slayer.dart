@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'demon_slayer_unity_screen.dart';
+import '../unity_ar_screen.dart';
 
 class ChooseVolumeDemonSlayer extends StatelessWidget {
   final List<Map<String, dynamic>> volumes = [
@@ -46,7 +46,10 @@ class ChooseVolumeDemonSlayer extends StatelessWidget {
     },
     {
       'image': 'assets/demonSlayer/Kimetsu_no_Yaiba_V11.webp',
-      'screen': DemonSlayerUnityScreen(),
+      'screen': UnityARScreen(
+        title: 'Demon Slayer V11 AR',
+        scene: 'LoadDemonSlayerV11ARScene',
+      ),
     },
     {
       'image': 'assets/demonSlayer/Kimetsu_no_Yaiba_V12.webp',

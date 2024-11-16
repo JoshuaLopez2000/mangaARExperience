@@ -3,12 +3,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 
-class DemonSlayerUnityScreen extends StatefulWidget {
+class UnityARScreen extends StatefulWidget {
+  final String title;
+  final String scene;
+
+  const UnityARScreen({
+    Key? key,
+    required this.title,
+    required this.scene,
+  }) : super(key: key);
+
   @override
-  _DemonSlayerUnityScreenState createState() => _DemonSlayerUnityScreenState();
+  _UnityARScreenState createState() => _UnityARScreenState();
 }
 
-class _DemonSlayerUnityScreenState extends State<DemonSlayerUnityScreen> {
+class _UnityARScreenState extends State<UnityARScreen> {
   late UnityWidgetController _unityWidgetController;
   bool _isUnityLoaded = false;
 
@@ -27,7 +36,7 @@ class _DemonSlayerUnityScreenState extends State<DemonSlayerUnityScreen> {
     _unityWidgetController = controller;
     _unityWidgetController.postMessage(
       'SceneManager',
-      'LoadDemonSlayerV11ARScene',
+      widget.scene,
       '',
     );
   }
@@ -46,7 +55,7 @@ class _DemonSlayerUnityScreenState extends State<DemonSlayerUnityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Demon Slayer AR'),
+        title: Text(widget.title),
       ),
       body: Stack(
         children: [
