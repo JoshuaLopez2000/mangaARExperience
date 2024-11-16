@@ -1,6 +1,7 @@
 using UnityEngine;
 using Vuforia;
 using UnityEngine.Video;
+using TMPro;
 
 public class VideoPlayback : MonoBehaviour
 {
@@ -11,9 +12,28 @@ public class VideoPlayback : MonoBehaviour
     private bool isPrepared = false; // Bandera para controlar el estado del video
     private bool isTracked = false; // Bandera para rastrear el estado del ImageTarget
 
+    //Swipe
+    public string desiredDirection = "derecha"; // Puede ser "arriba", "abajo", "izquierda", "derecha"
+    private Vector2 startTouchPosition, endTouchPosition;
+    private bool swipeDetected = false;
+    public float swipeThreshold = 50f; // Distancia mínima en píxeles para considerar un swipe
+
+    //fRAME
+    public GameObject frameImage;
+    public GameObject hintImage;
+
+    private Vector3 originalScale;
+
+
+
+
+
     void Start()
     {
         // Vincula el evento de cambio de estado del ImageTarget
+
+        originalScale = frameImage.transform.localScale;
+
         mObserverBehaviour = GetComponent<ObserverBehaviour>();
         if (mObserverBehaviour)
         {
@@ -24,9 +44,102 @@ public class VideoPlayback : MonoBehaviour
         string videoPath = System.IO.Path.Combine(Application.streamingAssetsPath, videoFileName);
         videoPlayer.url = videoPath;
 
-        // Prepara el video al inicio
         PrepareVideo();
     }
+
+    void Update()
+    {
+        DetectSwipe();
+
+        float scaleFactor = Mathf.PingPong(Time.time * 0.2f, 0.2f) + 0.9f;
+        hintImage.transform.localScale = originalScale * scaleFactor;
+
+    }
+
+    private void DetectSwipe()
+    {
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                // Al comenzar el toque, registra la posición inicial
+                startTouchPosition = touch.position;
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                // Al terminar el toque, registra la posición final
+                endTouchPosition = touch.position;
+
+                // Calcula la distancia del swipe
+                Vector2 swipeDelta = endTouchPosition - startTouchPosition;
+
+                // Verifica si el swipe es lo suficientemente largo para considerarlo válido
+                if (swipeDelta.magnitude >= swipeThreshold)
+                {
+                    swipeDetected = true;
+                    CheckSwipeDirection(swipeDelta);
+                }
+            }
+        }
+    }
+
+    private void CheckSwipeDirection(Vector2 swipeDelta)
+    {
+        if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
+        {
+            // Swipe horizontal
+            if (swipeDelta.x > 0)
+            {
+                Debug.Log("Swipe Detectado: Derecha");
+                if (desiredDirection == "derecha")
+                {
+                    OnSwipeDetected();
+                }
+            }
+            else
+            {
+                Debug.Log("Swipe Detectado: Izquierda");
+                if (desiredDirection == "izquierda")
+                {
+                    OnSwipeDetected();
+                }
+            }
+        }
+        else
+        {
+            // Swipe vertical
+            if (swipeDelta.y > 0)
+            {
+                Debug.Log("Swipe Detectado: Arriba");
+                if (desiredDirection == "arriba")
+                {
+                    OnSwipeDetected();
+                }
+            }
+            else
+            {
+                Debug.Log("Swipe Detectado: Abajo");
+                if (desiredDirection == "abajo")
+                {
+                    OnSwipeDetected();
+                }
+            }
+        }
+    }
+    private void OnSwipeDetected()
+    {
+        frameImage.SetActive(false);
+        Debug.Log("Swipe en la dirección deseada detectado: " + desiredDirection);
+        if (isTracked) {
+            DisableHints();
+            videoPlayer.Play();
+
+        }
+    }
+
+
 
     private void OnDestroy()
     {
@@ -52,19 +165,14 @@ public class VideoPlayback : MonoBehaviour
 
         if (isTracked)
         {
-            if (isPrepared)
-            {
-                videoPlayer.Play();
-            }
-            else
-            {
-                PrepareVideo();
-            }
+            EnableHints();
+            PrepareVideo();
         }
         else
         {
             if (videoPlayer.isPlaying)
             {
+                DisableHints();
                 videoPlayer.Stop();
                 isPrepared = false;
             }
@@ -75,10 +183,16 @@ public class VideoPlayback : MonoBehaviour
     {
         Debug.Log("Video preparado y listo para reproducirse");
         isPrepared = true;
+        EnableHints();
+    }
 
-        if (isTracked)
-        {
-            videoPlayer.Play();
-        }
+    private void DisableHints() {
+        frameImage.SetActive(false);
+        hintImage.SetActive(false);
+    }
+
+    private void EnableHints() {
+        frameImage.SetActive(true);
+        hintImage.SetActive(true);
     }
 }
