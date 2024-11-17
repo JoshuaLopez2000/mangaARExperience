@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="dsv11p118-vuforia" size="1.000000 1.000000" />
+    <ImageTarget name="dsv11p064-vuforia" size="1.000000 1.000000" />
+    <ImageTarget name="dsv11p024-vuforia" size="1.000000 1.000000" />
+    <ImageTarget name="dsv11p033-vuforia" size="1.000000 1.000000" />
+    <ImageTarget name="card01_hatena-1_ol" size="1.000000 1.000000" />
+  </Tracking>
+</QCARConfig>

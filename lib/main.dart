@@ -102,7 +102,7 @@ class _MyAppState extends State<MyApp> {
                               );
                       }).toList(),
                       options: CarouselOptions(
-                        height: 600,
+                        height: MediaQuery.of(context).size.height * 0.6,
                         enlargeCenterPage: true,
                         enableInfiniteScroll: true,
                         animateToClosest: true,
