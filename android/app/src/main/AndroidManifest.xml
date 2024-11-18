@@ -15,7 +15,7 @@
 
     <application
         android:name="${applicationName}"
-        android:label="flutter_unity_widget_example"
+        android:label="Manga AR Experience"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
