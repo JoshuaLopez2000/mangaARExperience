@@ -128,7 +128,16 @@ class ChooseVolumeDemonSlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose Volume'),
+        title: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.60,
+          child: FittedBox(
+            fit: BoxFit.cover,
+            child: Text(
+              'Choose Volume',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
       ),
       body: ListView.builder(
         itemCount: volumes.length,

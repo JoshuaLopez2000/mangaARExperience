@@ -45,10 +45,16 @@ class _MyAppState extends State<MyApp> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Manga AR Experience',
-                      style: TextStyle(
-                        fontSize: 25,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.75,
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: Text(
+                          'Manga AR Experience',
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                        ),
                       ),
                     ),
                     CarouselSlider(

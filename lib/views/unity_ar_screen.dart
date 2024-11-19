@@ -55,7 +55,13 @@ class _UnityARScreenState extends State<UnityARScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.75,
+          child: FittedBox(
+            fit: BoxFit.cover,
+            child: Text(widget.title),
+          ),
+        ),
       ),
       body: Stack(
         children: [
