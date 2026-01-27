@@ -1,5 +1,5 @@
-name: flutter_unity_widget_example
-description: Demonstrates how to use the flutter_unity_widget plugin.
+name: manga_ar_experience
+description: A Flutter application that provides an augmented reality experience for manga readers.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
