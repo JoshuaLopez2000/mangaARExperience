@@ -6,8 +6,11 @@ Manga AR Experience is a **Flutter-based mobile application that brings manga pa
 
 ## 📸 Screenshots
 
-> 🚧 Screenshots and AR capture GIFs coming soon.
-> (Capturas y GIFs del contenido AR pendientes.)
+| Pick a series | Pick a volume | AR content in action |
+| --- | --- | --- |
+| ![Pick a manga series](docs/media/pick_series.gif) | ![Pick a volume](docs/media/pick_volume.gif) | ![AR content triggered by scanning a page](docs/media/ar_preview.gif) |
+
+*Del carrusel de series al tomo elegido — y el escaneo de una página física disparando el contenido AR.*
 
 ## ✨ Features
 
